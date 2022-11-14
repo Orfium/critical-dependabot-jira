@@ -1,0 +1,68 @@
+name: 'Critical Dependabot Jira'
+description: 'Create a jira ticket of type bug when a dependabot with big impact is created.'
+
+inputs:
+  pat_token:
+    description: The github personal access token.
+    required: true
+  jira_base_url:
+    description: The base url of jira.
+    required: true
+  jira_user_email:
+    description: The email of jira user to open the bug.
+    required: true
+  jira_api_token:
+    description: The api token of jira of the user.
+    required: true
+  jira_project:
+    description: The jira project that the bug will be opened.
+    required: true
+  jira_issue_type:
+    description: The jira ticket issue type.
+    required: true
+    default: 'Bug'
+  jira_label:
+    description: The jira ticket label.
+    required: true
+    default: 'dependabot-critical'
+  cvss_threshold:
+    description: The dependabot
+    required: true
+    default: '9.0'
+
+branding:
+  color: red
+  icon: target
+
+runs:
+  using: "composite"
+  steps:
+    - name: Fetch Dependabot PR metadata
+      id: dependabot-metadata
+      uses: dependabot/fetch-metadata@v1.3.3
+      with:
+        alert-lookup: true
+        github-token: "${{ secrets.PAT_TOKEN }}"
+
+    - name: Login to jira
+      id: jira-login
+      if: ${{ steps.dependabot-metadata.outputs.cvss >= inputs.CVSS_THRESHOLD }}
+      uses: atlassian/gajira-login@v2.0.0
+      env:
+        JIRA_BASE_URL: ${{ inputs.jira_base_url }}
+        JIRA_USER_EMAIL: ${{ inputs.jira_user_email }}
+        JIRA_API_TOKEN: ${{ inputs.jira_api_token }}
+
+    - name: Open jira bug
+      id: open-jira-bug
+      if: ${{ steps.dependabot-metadata.outputs.cvss >= inputs.cvss_threshold }}
+      uses: atlassian/gajira-create@v2.0.1
+      with:
+        project: ${{ inputs.jira_project }}
+        issuetype: ${{ inputs.jira_issue_type }}
+        summary: |
+          🚨 [${{github.event.repository.name }}] ${{github.event.pull_request.title }}
+        description: |
+          Dependabot opened a [Pull Request | ${{ github.event.pull_request.html_url }}] that fixes a security vulnerability with [CVSS | https://en.wikipedia.org/wiki/Common_Vulnerability_Scoring_System ] score ${{ steps.dependabot-metadata.outputs.cvss }}.
+          [GitHub Advisory Database entry | https://github.com/advisories/${{steps.dependabot-metadata.outputs.ghsa-id}} ]
+        fields: '{"labels": ["${{inputs.jira_label}}"]}'
