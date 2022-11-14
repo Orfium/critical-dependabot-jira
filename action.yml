@@ -26,7 +26,7 @@ inputs:
     required: true
     default: 'dependabot-critical'
   cvss_threshold:
-    description: The dependabot
+    description: The CVSS threshold that triggers jira ticket creation.
     required: true
     default: '9.0'
 
