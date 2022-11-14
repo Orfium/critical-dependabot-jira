@@ -39,7 +39,7 @@ runs:
   steps:
     - name: Fetch Dependabot PR metadata
       id: dependabot-metadata
-      uses: dependabot/fetch-metadata@v1.3.3
+      uses: dependabot/fetch-metadata@v1.3.5
       with:
         alert-lookup: true
         github-token: "${{ secrets.PAT_TOKEN }}"
