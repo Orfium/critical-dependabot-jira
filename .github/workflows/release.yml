@@ -1,0 +1,24 @@
+name: "Release and bump version when pushing to main branch"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.1.0
+      - name: Install dependencies
+        uses: actions/setup-node@v3.5.1
+        with:
+          node-version: "16.x"
+      - name: Install dependencies
+        run: yarn install
+      - name: Release
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
