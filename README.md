@@ -25,6 +25,37 @@ with the `repo.public_repo` scope and the `jira_api_token` which is a [Jira API 
 Nothing to output.
 
 ## Example of usage
-TBA
+The composite action is called inside a pull request only when it is opened. Also, the PR's actor should be dependabot. \
+Example snippet:
+
+```
+on:
+  pull_request:
+    branches:
+      - 'dependabot/**'
+    types:
+      - opened
+
+jobs:
+  critical-jira-creator:
+    runs-on: ubuntu-latest
+    if: github.actor != 'dependabot[bot]'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3.1.0
+      - uses: Orfium/critical-dependabot-jira@main
+        with:
+          pat_token: ${{ secrets.PAT_TOKEN }}
+          jira_base_url: ${{ secrets.JIRA_BASE_URL }}
+          jira_user_email: ${{ secrets.JIRA_USER_EMAIL }}
+          jira_api_token: ${{ secrets.JIRA_API_TOKEN }}
+          jira_project: 'CMO | ADR'
+          cvss_threshold: 5.0
+```
+One can also change the CVSS threshold to his/her liking.
+
+# Important note
+It is best to enable the setting that allows dependabot to create pull requests regarding security updates automatically. Reference link: [Configuring Dependabot security updates
+](https://docs.github.com/en/code-security/dependabot/dependabot-security-updates/configuring-dependabot-security-updates).
 
 
