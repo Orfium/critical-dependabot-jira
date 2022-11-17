@@ -20,7 +20,8 @@ The action needs a series of inputs to be set in order to function properly.
 ### Secrets needed
 The repository needs two secrets, the `pat_token` which is a
 [Github Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
-with the `repo.public_repo` scope and the `jira_api_token` which is a [Jira API Token](https://id.atlassian.com/manage-profile/security/api-tokens).
+with the `repo.public_repo` scope if it is a public repository or all scopes under `repo` for private repositories
+ and the `jira_api_token` which is a [Jira API Token](https://id.atlassian.com/manage-profile/security/api-tokens).
 
 ## Outputs
 Nothing to output.
