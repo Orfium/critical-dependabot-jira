@@ -1,5 +1,5 @@
 # Critical Dependabot Jira
-Create a jira ticket of issue type **Bug** when a critical dependabot pull request is created in the repository. \ 
+Create a jira ticket of issue type **Bug** when a critical dependabot pull request is created in the repository. \
 Criticality can be configured by setting a CVSS threshold.
 
 # Usage
