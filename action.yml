@@ -42,7 +42,7 @@ runs:
       uses: dependabot/fetch-metadata@v1.3.3
       with:
         alert-lookup: true
-        github-token: "${{ inputs.pat_token }}"
+        github-token: ${{ inputs.pat_token }}
 
     - name: Login to jira
       id: jira-login
