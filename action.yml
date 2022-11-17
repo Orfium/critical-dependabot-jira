@@ -63,6 +63,6 @@ runs:
         summary: |
           🚨 [${{github.event.repository.name }}] ${{github.event.pull_request.title }}
         description: |
-          Dependabot opened a [Pull Request | ${{ github.event.pull_request.html_url }}] that fixes a security vulnerability with [CVSS | https://en.wikipedia.org/wiki/Common_Vulnerability_Scoring_System ] score ${{ steps.dependabot-metadata.outputs.cvss }}.
-          [GitHub Advisory Database entry | https://github.com/advisories/${{steps.dependabot-metadata.outputs.ghsa-id}} ]
+          Dependabot opened a [Pull Request| ${{ github.event.pull_request.html_url }}] that fixes a security vulnerability with [CVSS| https://en.wikipedia.org/wiki/Common_Vulnerability_Scoring_System ] score ${{ steps.dependabot-metadata.outputs.cvss }}.
+          [GitHub Advisory Database entry| https://github.com/advisories/${{steps.dependabot-metadata.outputs.ghsa-id}} ]
         fields: '{"labels": ["${{inputs.jira_label}}"]}'
