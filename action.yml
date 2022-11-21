@@ -56,7 +56,7 @@ runs:
     - name: Open jira bug
       id: open-jira-bug
       if: ${{ steps.dependabot-metadata.outputs.cvss >= inputs.cvss_threshold }}
-      uses: atlassian/gajira-create@v2.0.1
+      uses: atlassian/gajira-create@v3.0.0
       with:
         project: ${{ inputs.jira_project }}
         issuetype: ${{ inputs.jira_issue_type }}
