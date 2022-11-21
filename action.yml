@@ -47,7 +47,7 @@ runs:
     - name: Login to jira
       id: jira-login
       if: ${{ steps.dependabot-metadata.outputs.cvss >= inputs.CVSS_THRESHOLD }}
-      uses: atlassian/gajira-login@v2.0.0
+      uses: atlassian/gajira-login@v3.0.0
       env:
         JIRA_BASE_URL: ${{ inputs.jira_base_url }}
         JIRA_USER_EMAIL: ${{ inputs.jira_user_email }}
