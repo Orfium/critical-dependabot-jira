@@ -66,4 +66,4 @@ When running this GitHub action, there are some warnings and errors that you mig
 - `set-output` is deprecated. We will wait for its fix.
 
 # Contributions
-Special thanks to @le4ker for contributing.
+Special thanks to [@le4ker](https://github.com/le4ker) for his contribution.
