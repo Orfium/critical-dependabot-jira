@@ -54,6 +54,7 @@ jobs:
           cvss_threshold: 5.0
 ```
 One can also change the CVSS threshold to his/her liking.
+As the PR is opened from dependabot, it is crucial to set the secrets under Dependabot in Secrets sidebar. More information can be found [here](https://github.blog/changelog/2021-11-30-github-actions-workflows-triggered-by-dependabot-receive-dependabot-secrets/).
 
 # Important note
 It is best to enable the setting that allows dependabot to create pull requests regarding security updates automatically. Reference link: [Configuring Dependabot security updates
@@ -63,3 +64,6 @@ It is best to enable the setting that allows dependabot to create pull requests 
 When running this GitHub action, there are some warnings and errors that you might face:
 - You get a `Logged in as: undefined`, when the GitHub action tries to log in to your jira user. This is a known and non-stopper issue that it is described here: [GitHub Issue](https://github.com/atlassian/gajira-login/issues/30).
 - `set-output` is deprecated. We will wait for its fix.
+
+# Contributions
+Special thanks to @le4ker for contributing.
